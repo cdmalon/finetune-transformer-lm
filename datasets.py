@@ -9,6 +9,30 @@ from sklearn.model_selection import train_test_split
 
 seed = 3535999445
 
+def _entailment(path):
+    premise_fp = open(path + ".premise", "r")
+    hypothesis_fp = open(path + ".hypothesis", "r")
+    label_fp = open(path + ".label", "r")
+
+    premises = []
+    hypotheses = []
+    labels = []
+
+    print("Loading " + path)
+
+    for label_line in tqdm(list(label_fp), ncols=80, leave=False):
+        labels.append(int(label_line.rstrip()))
+        premises.append(premise_fp.readline().rstrip())
+        hypotheses.append(hypothesis_fp.readline().rstrip())
+
+    return premises, hypotheses, labels
+
+def entailment(data_dir):
+    trn_p, trn_h, trn_y = _entailment(os.path.join(data_dir, "train"))
+    val_p, val_h, val_y = _entailment(os.path.join(data_dir, "dev"))
+    tst_p, tst_h, tst_y = _entailment(os.path.join(data_dir, "test"))
+    return (trn_p, trn_h, trn_y), (val_p, val_h, val_y), (tst_p, tst_h, tst_y)
+
 def _rocstories(path):
     with open(path) as f:
         f = csv.reader(f)
