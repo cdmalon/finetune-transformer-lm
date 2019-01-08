@@ -8,6 +8,11 @@ This modified version of the code supports the option "--dataset entailment",
 to train models for entailment problems such as SNLI, following the
 description in the paper.
 
+This model was used in the
+[FEVER Fact Extraction and Verification](http://fever.ai) challenge
+for the system with best evidence F1 score, as described in the paper
+[Team Papelo: Transformer Networks at FEVER](http://aclweb.org/anthology/W18-5517).
+
 Training input is expected to be in files named `train.premise`,
 `train.hypothesis`, and `train.label`.  These files should use one line per
 example.  The premise and hypothesis will be tokenized by Spacy.
